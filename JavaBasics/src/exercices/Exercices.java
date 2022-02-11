@@ -5,13 +5,24 @@ import ajc.basics.House;
 
 public class Exercices {
 	public static void exercice3() {
-		Car		horse;
-		House	evil;
+		// Exercice added some getters/setters
+		// As well as a new house class
+		House	sherlock;
+		House	babaYaga;
+		Car		wreck;
 		
-		horse = new Car();
-		horse.displayInfos();
-		evil = new House(null, null, 23);
-		evil.displayInfos();
+		sherlock = new House(null, null, -32);
+		sherlock.displayInfos();
+		babaYaga = new House("On chicken legs", "Woods", 9000);
+		babaYaga.displayInfos();
+		wreck = new Car();
+		wreck.displayInfos();
+		wreck.setColor("Dirty yellow");
+		wreck.setYear(2022);
+		wreck.setModel(null);
+		wreck.displayInfos();
+		System.out.println(wreck.getYear());
+		System.out.print(babaYaga);
 	}
 	
 	public static void exercice2() {
