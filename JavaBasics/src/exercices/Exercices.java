@@ -25,6 +25,7 @@ public class Exercices {
 		backToFuture.displayInfos();
 		
 		// Method 1 w/out constructor. Pathetic.
+		// This will ONLY work as long as those properties are public.
 		backToFuture.color = "grey";
 		backToFuture.model = "Dolorean";
 		backToFuture.year = 1985;
