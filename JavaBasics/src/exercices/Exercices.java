@@ -79,10 +79,16 @@ public class Exercices {
 	
 	public static void exercice5() {
 		Orc		grugct;
+		Orc		grugctTheSecond;
 		Orc		jeanJacques;
 		
 		grugct = new Orc("Grugct", 50, 5);
+		grugctTheSecond = new Orc("Grugct", 50, 5);
 		jeanJacques = new Orc("Jean-Jacques", 60, 10);
+
+		System.out.println(grugct.equals(grugctTheSecond));
+		System.out.println(grugct.equals(jeanJacques));
+		
 		while (grugct.isAlive() && jeanJacques.isAlive()) {
 			System.out.println(grugct);
 			System.out.println(jeanJacques);

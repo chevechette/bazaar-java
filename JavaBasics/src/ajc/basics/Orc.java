@@ -31,6 +31,11 @@ public class Orc {
         return sb.toString();
 	}
 
+	public boolean equals(Orc brother) {
+		return this.name == brother.name &&
+				this.force == brother.force;
+	}
+
 	public String getName() {
 		return name;
 	}
