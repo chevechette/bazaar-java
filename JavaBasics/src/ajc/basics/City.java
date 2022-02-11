@@ -37,9 +37,8 @@ public class City {
 
 	@Override
 	public String		toString() {
-		return "City [name=" + name + ", country=" +
-				country + ", population=" + population +
-				", category=" + category + ", capital=" + capital + "]";
+		return String.format("%s is a %s %s that houses a population of %f million (human).",
+					this.name, this.category, this.capital ? "capital" : "city", this.population);
 	}
 
 	public String		getName() {
