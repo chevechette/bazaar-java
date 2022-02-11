@@ -1,5 +1,7 @@
 package ajc.basics;
 
+import java.util.Objects;
+
 public class Orc {
 	private String	name;
 	private int		health;
@@ -29,6 +31,23 @@ public class Orc {
                 .append(", force='").append(this.force)
                 .append(']');
         return sb.toString();
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(force, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Orc other = (Orc) obj;
+		return force == other.force && Objects.equals(name, other.name);
 	}
 
 	public boolean equals(Orc brother) {
