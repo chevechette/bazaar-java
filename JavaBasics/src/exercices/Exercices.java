@@ -66,7 +66,7 @@ public class Exercices {
 		City	shenzhen;
 		
 		chicago = new City("Chicago", "U.S.A.", 2.746388, false);
-		irkutsk = new City("Irkutsk", "Russia", 0.617473, false);
+		irkutsk = new City("Irkutsk", "Russia", 0.617473, true);
 		shenzhen = new City("Shenzhen", "China", 7.494398, false);
 		
 		System.out.println(chicago.toString());
