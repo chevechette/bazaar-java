@@ -5,10 +5,14 @@ public class Orc {
 	private int		health;
 	private int		force;
 	
+	public Orc(int health, int force) {
+		this(null, health, force);
+	}
+	
 	public Orc(String name, int health, int force) {
-		this.name = name;
-		this.health = health;
-		this.force = force;
+		this.setName(name);
+		this.setHealth(health);
+		this.setForce(force);
 	}
 	
 	public void		attack(Orc ennemy) {
@@ -44,7 +48,7 @@ public class Orc {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = (name != null) ? name : "nameless";
 	}
 
 	public void setHealth(int health) {
