@@ -18,13 +18,13 @@ public class City {
 		String		comparator;
 		
 		if (this.population > c.population) {
-			comparator = "bigger than";
+			comparator = "is bigger than";
 		} else if (this.population < c.population) {
-			comparator = "smaller than";
+			comparator = "is smaller than";
 		} else {
 			comparator = "equals to";
 		}
-		return(String.format("City %s is %s City %s", this.name, comparator, c.name));
+		return String.format("City %s %s City %s", this.name, comparator, c.name);
 	}
 
 	private void		updateCategory() {
@@ -37,8 +37,10 @@ public class City {
 
 	@Override
 	public String		toString() {
-		return String.format("%s is a %s %s that houses a population of %f million (human).",
-					this.name, this.category, this.capital ? "capital" : "city", this.population);
+		return String.format(
+				"%s is a %s %s that houses a population of %f million (human).",
+				this.name, this.category,
+				this.capital ? "capital" : "city", this.population);
 	}
 
 	public String		getName() {
