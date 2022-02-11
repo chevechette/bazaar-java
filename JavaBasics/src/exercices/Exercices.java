@@ -3,6 +3,7 @@ package exercices;
 import ajc.basics.Car;
 import ajc.basics.House;
 import ajc.basics.City;
+import ajc.basics.Orc;
 
 public class Exercices {
 	public static void exercice1() {
@@ -76,10 +77,27 @@ public class Exercices {
 		System.out.println(shenzhen.makeCompare(chicago));
 	}
 	
+	public static void exercice5() {
+		Orc		grugct;
+		Orc		jeanJacques;
+		
+		grugct = new Orc("Grugct", 50, 5);
+		jeanJacques = new Orc("Jean-Jacques", 60, 10);
+		while (grugct.isAlive() && jeanJacques.isAlive()) {
+			System.out.println(grugct);
+			System.out.println(jeanJacques);
+			grugct.attack(jeanJacques);
+			jeanJacques.attack(grugct);
+		}
+		System.out.println(grugct);
+		System.out.println(jeanJacques);
+	}
+	
 	public static void main(String[] args) {
 //		exercice1();
 //		exercice2();
 //		exercice3();
-		exercice4();
+//		exercice4();
+		exercice5();
 	}
 }
