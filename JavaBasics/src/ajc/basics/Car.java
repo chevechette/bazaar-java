@@ -6,7 +6,15 @@ public class Car {
 	public int			year;
 	
 	public Car() {
-		
+		this.color = "red";
+		this.model = "Peugot";
+		this.year = 2002;
+	}
+
+	public Car(String color) {
+		this.color = color;
+		this.model = "Peugot";
+		this.year = 2002;
 	}
 	
 	public Car(String color, String model, int year) {

@@ -3,6 +3,20 @@ package exercices;
 import ajc.basics.Car;
 
 public class Exercices {
+	public static void exercice2() {
+		Car		unknown;
+		Car		french;
+		Car		corvette;
+		
+		unknown = new Car();
+		french = new Car("pink");
+		corvette = new Car("nuclear", "covette", 3000);
+		
+		unknown.displayInfos();
+		french.displayInfos();
+		corvette.displayInfos();
+	}
+	
 	public static void exercice1() {
 		Car		backToFuture;
 		Car		tardis;
@@ -22,6 +36,7 @@ public class Exercices {
 	}
 	
 	public static void main(String[] args) {
-		exercice1();	
+		//exercice1();
+		exercice2();
 	}
 }
