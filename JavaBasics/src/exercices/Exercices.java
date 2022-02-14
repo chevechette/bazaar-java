@@ -4,6 +4,11 @@ import ajc.basics.Car;
 import ajc.basics.House;
 import ajc.basics.City;
 import ajc.basics.Orc;
+import ajc.basics.Computer;
+import ajc.basics.Commande;
+import ajc.basics.Edessert;
+import ajc.basics.Edrink;
+import ajc.basics.Emeal;
 
 public class Exercices {
 	public static void exercice1() {
@@ -99,11 +104,55 @@ public class Exercices {
 		System.out.println(jeanJacques);
 	}
 	
+	public static void	exercice6() {
+		// Sujet de l'exercice : variable statiques.
+		// Il y a un static int défini tel que Computer.maxMemory
+		// qui limite les possibilité de Computer.setMemory()
+		
+		Computer	hal;
+		Computer	skynet;
+		
+		hal = new Computer("HAL", 10);
+		skynet = new Computer("Skynet", 123431);
+		
+		System.out.println(hal);
+		System.out.println(skynet);
+		Computer.setMaxMemory(200000);
+		hal.setMemory(12333);
+		System.out.println(hal);		
+	}
+	
+	public static void	exercice7( ) {
+		System.out.println("I really don't want to do this");
+		
+		Commande	food;
+		System.out.println("==========OPTION DRINK==========");
+		for (Edrink choiceDrink : Edrink.values()) {
+			System.out.println(choiceDrink);
+		}
+		
+		System.out.println("==========OPTION MEAL==========");
+		for (Emeal choiceDrink : Emeal.values()) {
+			System.out.println(choiceDrink);
+		}
+
+		System.out.println("==========OPTION DESSERT==========");
+		for (Edessert choiceDrink : Edessert.values()) {
+			System.out.println(choiceDrink);
+		}
+		food = new Commande("Rogers", Edrink.LIMONADE, Emeal.BORSCH, Edessert.TIRAMISU);
+		System.out.println(food);
+		System.out.println(food.getPrixTotal());
+		
+	}
+	
 	public static void main(String[] args) {
 //		exercice1();
 //		exercice2();
 //		exercice3();
 //		exercice4();
-		exercice5();
+//		exercice5();
+//		exercice6();
+		exercice7();
 	}
 }
