@@ -123,8 +123,6 @@ public class Exercices {
 	}
 	
 	public static void	exercice7( ) {
-		System.out.println("I really don't want to do this");
-		
 		Commande	food;
 		System.out.println("==========OPTION DRINK==========");
 		for (Edrink choiceDrink : Edrink.values()) {
