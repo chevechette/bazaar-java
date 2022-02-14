@@ -9,7 +9,7 @@ public class OrcHandling {
 	static Scanner sc = new Scanner(System.in);
 
 	public static String greeting() {
-		return "Starting up OMP v.0.1...";
+		return "Starting up OMP v.0.2...";
 	}
 	
 	public static void help() {
@@ -21,34 +21,28 @@ public class OrcHandling {
 	}
 	
 	public static void creatingOrc(Map<String, Orc> mine) {
-		String		userEntry;
-		Orc			fledgling;
-		String		fledgeName;
-		int			fledgeStrength;
-		int			fledgeHP;
+		String	fledgeName;
+		int		fledgeStrength;
+		int		fledgeHP;
 		
 		System.out.println("We shall create new Orcs");
 		try {
 			System.out.println("Name ?");
 			fledgeName = sc.next();
 			System.out.println("Strength ?");
-			userEntry = sc.next();
-			fledgeStrength = Integer.parseInt(userEntry);
+			fledgeStrength = Integer.parseInt(sc.next());
 			System.out.println("Hit Point ?");
-			userEntry = sc.next();
-			fledgeHP = Integer.parseInt(userEntry);
-			fledgling = new Orc(fledgeName, fledgeStrength, fledgeHP);
-			mine.put(fledgeName, fledgling);
+			fledgeHP = Integer.parseInt(sc.next());
+			mine.put(fledgeName, new Orc(fledgeName, fledgeHP, fledgeStrength));
 			System.out.println("Orc has been created today.");
 		} catch (Exception e) {
 			System.out.println("No Orc has been created today.");
 			return ;
 		}
-		System.out.println("OK");
 	}
 	
 	public static void killingOrc(Map<String, Orc> mine) {
-		String		sacrifice;
+		String	sacrifice;
 
 		System.out.println("Who shall die ?");
 		sacrifice = sc.next();
@@ -70,6 +64,8 @@ public class OrcHandling {
 		for (String orcName : mine.keySet()) {
 			System.out.println(mine.get(orcName));
 		}
+		System.out.println(mine.entrySet().stream().mapToInt(orc -> orc.getValue().getForce()).sum());
+
 	}
 	
 	public static void	howStrong(Map<String, Orc> mine) {
@@ -87,12 +83,13 @@ public class OrcHandling {
 	}
 	
 	public static void main(String[] args) {
-        Map<String, Runnable>	commands = new HashMap<>();
+        Map<String, Runnable>	commands;
 		boolean					active;
 		Map<String, Orc>		orcMine;
 		String					userEntry;
 
 		active = true;
+		commands = new HashMap<>();
 		orcMine = new HashMap<String, Orc>();
 		commands.put("create", () -> creatingOrc(orcMine));
 		commands.put("delete", () -> killingOrc(orcMine));
