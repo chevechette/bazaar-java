@@ -1,4 +1,4 @@
-package stupiddungeon;
+package thomas;
 
 import java.util.ArrayList;
 import java.util.Scanner;
