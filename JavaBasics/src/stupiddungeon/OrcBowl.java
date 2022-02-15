@@ -13,13 +13,14 @@ public class OrcBowl {
 		Orc						blueChief;
 		HashMap<Orc, OrcTeam>	teams;
 		
+		OrcTeam.randomOrcName();
 		redChief = new Orc("Sarge", 60, 12);
 		blueChief = new Orc("Church", 60, 12);
-		reds = new OrcTeam(redChief);
+		reds = new OrcTeam("Reds", redChief);
 		reds.addToTeam(new Orc("Griff", 10, 40));
 		reds.addToTeam(new Orc("Simmons", 10, 40));
 		reds.addToTeam(new Orc("Donut", 10, 40));
-		blues = new OrcTeam(blueChief);
+		blues = new OrcTeam("Blues", blueChief);
 		blues.addToTeam(new Orc("Tucker", 10, 40));
 		blues.addToTeam(new Orc("Caboose", 10, 40));
 		blues.addToTeam(new Orc("Tex", 10, 40));

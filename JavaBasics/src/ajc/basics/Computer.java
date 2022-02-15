@@ -4,6 +4,7 @@ public class Computer {
 	static private int	maxMemory = 128;
 	private String		model;
 	private int			memory;
+	private int			processorFreq;
 	
 	public Computer(String model, int memory) {
 		this.setModel(model);
@@ -21,6 +22,14 @@ public class Computer {
 	@Override
 	public String toString() {
 		return "Computer [model=" + model + ", memory=" + memory + "]";
+	}
+
+	public int getProcessorFreq() {
+		return processorFreq;
+	}
+
+	public void setProcessorFreq(int processorFreq) {
+		this.processorFreq = processorFreq;
 	}
 
 	public static int getMaxMemory() {
