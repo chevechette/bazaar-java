@@ -1,8 +1,9 @@
 package Corporation;
 
 public class Status {
-	private boolean	manager = false;
-	private int		year = 0;
+	private boolean		manager = false;
+	private int			year = 0;
+	private Employee	owner = null;
 	
 	public Status() {
 		
@@ -21,6 +22,17 @@ public class Status {
 		builder.append(year);
 		builder.append("]");
 		return builder.toString();
+	}
+	
+	public Employee getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Employee owner) {
+		if (this.owner == null || !this.owner.equals(owner)) {
+			this.owner = owner;
+			this.owner.setStatus(this);
+		}
 	}
 
 	public Status(boolean manager) {
