@@ -3,7 +3,6 @@ package exercices;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import ajc.basics.Car;
