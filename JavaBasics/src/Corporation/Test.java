@@ -3,6 +3,7 @@ package Corporation;
 public class Test {
 	public static void main(String[] args) {
 		Status 		manager;
+		Status 		goodGrunt;
 		Status 		grunt;
 		BankInfo	creditSuisse;
 		BankInfo	hsbc;
@@ -13,6 +14,7 @@ public class Test {
 		Employee	millie;
 		
 		manager = new Status(5, true);
+		goodGrunt = new Status(4);
 		grunt = new Status();
 		creditSuisse = new BankInfo("Créduit Suisse", "L33T");
 		hsbc = new BankInfo("HSBC", "011010101");
@@ -20,8 +22,8 @@ public class Test {
 		imp = new Company("I.M.P.");
 		
 		blitzo = new Employee("Bitz", "O", 0, imp, lit, manager);
-		moxxie = new Employee("Moxxie", "Axe", 0, imp, lit, grunt);
-		millie = new Employee("Millie", "Axe", 0, imp, lit, grunt);
+		moxxie = new Employee("Moxxie", "Axe", 0, imp, hsbc, goodGrunt);
+		millie = new Employee("Millie", "Axe", 0, imp, creditSuisse, grunt);
 
 		System.out.println(manager);
 		System.out.println(grunt);
