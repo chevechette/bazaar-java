@@ -1,6 +1,7 @@
 package Corporation;
 
 public class Employee {
+	private int			id;
 	private String		firstname;
 	private String		lastname;
 	double				salary;
@@ -29,6 +30,8 @@ public class Employee {
 		builder.append(firstname);
 		builder.append(", lastname=");
 		builder.append(lastname);
+		builder.append(", id=");
+		builder.append(id);
 		builder.append(", salary=");
 		builder.append(salary);
 		builder.append(", status=");
@@ -94,7 +97,15 @@ public class Employee {
 	public void setCompany(Company company) {
 		if (this.company == null || !this.company.equals(company)) {
 			this.company = company;
-			this.company.recruit(this);
+			this.id = this.company.recruit(this);
 		}
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }
