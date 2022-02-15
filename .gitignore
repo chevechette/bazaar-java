@@ -2,6 +2,9 @@
 *.class
 bin/
 
+# OS specific garbage
+.DS_Store
+
 # Eclipse
 .metadata
 bin/

@@ -1,5 +1,8 @@
 package exercices;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import ajc.basics.Car;
 import ajc.basics.House;
 import ajc.basics.City;
@@ -144,6 +147,23 @@ public class Exercices {
 		
 	}
 	
+	public static void	exercice8() {
+		ArrayList<Orc>			orcs;
+		HashMap<String, Orc>	hashedOrc;
+		
+		orcs = new ArrayList<>();
+		orcs.add(new Orc("Jeremy", 40, 12));
+		orcs.add(new Orc("Francis", 40, 12));
+		orcs.add(new Orc("Bertrand", 40, 12));
+		hashedOrc = new HashMap<>();
+		for (Orc orc : orcs) {
+			System.out.println(orc);
+			hashedOrc.put(orc.getName(), orc);
+		}
+		hashedOrc.remove("Francis");
+		System.out.println(hashedOrc);
+	}
+	
 	public static void main(String[] args) {
 //		exercice1();
 //		exercice2();
@@ -151,6 +171,7 @@ public class Exercices {
 //		exercice4();
 //		exercice5();
 //		exercice6();
-		exercice7();
+//		exercice7();
+		exercice8();
 	}
 }
