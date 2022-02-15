@@ -6,14 +6,20 @@ public class Employee {
 	double				salary;
 	private Status		status;
 	private BankInfo	bankInfo;
+	private Company		company;
 	
 	public Employee(String firstname, String lastname, double salary,
 					Company company, BankInfo bank, Status status) {
+		this.status = null;
+		this.bankInfo = null;
+		this.company = null;
+		
 		this.setFirstname(firstname);
 		this.setLastname(lastname);
 		this.setSalary(salary);
 		this.setStatus(status);
 		this.setBankInfo(bank);
+		this.setCompany(company);
 	}
 
 	@Override
@@ -29,6 +35,8 @@ public class Employee {
 		builder.append(status);
 		builder.append(", bankInfo=");
 		builder.append(bankInfo);
+		builder.append(", company=");
+		builder.append(company.getName());
 		builder.append("]");
 		return builder.toString();
 	}
@@ -53,6 +61,10 @@ public class Employee {
 		return bankInfo;
 	}
 
+	public Company getCompany() {
+		return company;
+	}
+
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
@@ -66,10 +78,23 @@ public class Employee {
 	}
 
 	public void setStatus(Status status) {
-		this.status = status;
+		if (this.status == null || !this.status.equals(status)) {
+			this.status = status;
+			this.status.setOwner(this);
+		}
 	}
 
 	public void setBankInfo(BankInfo bankInfo) {
-		this.bankInfo = bankInfo;
+		if (this.bankInfo == null || !this.bankInfo.equals(bankInfo)) {
+			this.bankInfo = bankInfo;
+			this.bankInfo.setOwner(this);
+		}
+	}
+
+	public void setCompany(Company company) {
+		if (this.company == null || !this.company.equals(company)) {
+			this.company = company;
+			this.company.recruit(this);
+		}
 	}
 }

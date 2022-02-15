@@ -1,12 +1,14 @@
 package Corporation;
 
 public class BankInfo {
-	private String	number;
-	private String	bankName;
+	private String		number;
+	private String		bankName;
+	private Employee	owner;
 	
 	public BankInfo(String number, String name) {
 		this.setBankName(name);
 		this.setNumber(number);
+		this.owner = null;
 	}
 
 	@Override
@@ -18,6 +20,17 @@ public class BankInfo {
 		builder.append(bankName);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public Employee getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Employee owner) {
+		if (this.owner == null || !this.owner.equals(owner)) {
+			this.owner = owner;
+			this.owner.setBankInfo(this);
+		}
 	}
 
 	public String getNumber() {
