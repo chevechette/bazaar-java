@@ -10,6 +10,7 @@ public class Launcher {
     public static void main(String[] args) {
     	
         ArrayList<Orc> listOrc=new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("bonjour");
             System.out.println("Que voulez vous faire?\n" +
@@ -17,7 +18,6 @@ public class Launcher {
                     "2: Supprimer un Orc\n" +
                     "3: Afficher la force totale\n" +
                     "4: Quitter");
-            Scanner scanner = new Scanner(System.in);
             String index = scanner.next();
             switch(index) {
                 case "1":
