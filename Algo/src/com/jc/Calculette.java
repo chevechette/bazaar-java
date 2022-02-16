@@ -114,7 +114,7 @@ public class Calculette {
 		boolean	calculating;
 		String	input;
 		
-		System.out.println("Usage : Enter a number, an operator and a second number.");
+		System.out.println("Usage : Enter a number, an operator and a second number. Ex: '12' '+12'");
 		System.out.println("You can iterate on the result with another operator or number.");
 		System.out.println("Use 'C' to clean your answer and 'S' to quit.");
 
@@ -124,7 +124,11 @@ public class Calculette {
 			a = sc.nextDouble();
 			
 			while (calculating) {
-				op = sc.next().charAt(0);
+				input = sc.next();
+				if (input.contains("C")) {
+					op = 'C';
+				}
+				op = input.charAt(0);
 				if (op == 'C') {
 					a = 0;
 					System.out.println("Reintialising value.");
@@ -133,10 +137,6 @@ public class Calculette {
 					calculating = false;
 					System.out.println("Thank you for using our stuff. Your final value is " + a);
 					break;
-				}
-				input = sc.next();
-				if (input.contains("C")) {
-					op = 'C';
 				}
 				b = Double.parseDouble(input.substring(1));
 				switch (op) {
