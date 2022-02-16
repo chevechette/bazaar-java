@@ -35,9 +35,11 @@ public class OrcHandling {
 			fledgeHP = Integer.parseInt(sc.next());
 			mine.put(fledgeName, new Orc(fledgeName, fledgeHP, fledgeStrength));
 			System.out.println("Orc has been created today.");
+		} catch (NumberFormatException e) {
+			System.err.println("This is not a number, try again.");
 		} catch (Exception e) {
-			System.out.println("No Orc has been created today.");
-			return ;
+			e.printStackTrace();
+			System.err.println("No Orc has been created today.");
 		}
 	}
 	
@@ -45,19 +47,25 @@ public class OrcHandling {
 		String	sacrifice;
 
 		System.out.println("Who shall die ?");
-		sacrifice = sc.next();
+		try {
+			sacrifice = sc.next();
+		} catch (Exception e) {
+			System.err.println("Some input issue. Try again.");
+			e.printStackTrace();
+			return ;
+		}
 		if (mine.containsKey(sacrifice)) {
 			mine.remove(sacrifice);
 			System.out.println("Orc " + sacrifice + " has been killed."
 					+ mine.size() + " orcs remaining.");
 		} else {
-			System.out.println("There is no such Orc within our ranks. Would you like to create one ?");
+			System.err.println("There is no such Orc within our ranks. Would you like to create one ?");
 		}
 	}
 	
 	public static void	inspectMine(Map<String, Orc> mine) {
 		if (mine.size() == 0) {
-			System.out.println("The production has yet to birth orcs.");
+			System.err.println("The production has yet to birth orcs.");
 			return;
 		}
 		System.out.format("The mine has birthed %d orcs. Those orcs are :", mine.size());
@@ -106,10 +114,11 @@ public class OrcHandling {
 				userEntry = sc.next();
 				if (userEntry.equals("quit"))
 					active = false;
-	            if (commands.containsKey(userEntry))
+				else if (commands.containsKey(userEntry))
 	                commands.get(userEntry).run();
 			} catch (Exception e) {
 				System.err.println("Scanner did die again.");
+				e.printStackTrace();
 				active = false;
 			}
 		} while (active);

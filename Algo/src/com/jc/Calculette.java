@@ -156,7 +156,7 @@ public class Calculette {
 						a = mod(a, b);
 						break;
 					default:
-						System.out.println("Unknown operation type.");
+						System.err.println("Unknown operation type.");
 						break;
 				}
 				System.out.println("Current answer : " + a);
