@@ -1,4 +1,4 @@
-package Corporation;
+package corporation;
 
 import java.util.ArrayList;
 import java.util.Iterator;

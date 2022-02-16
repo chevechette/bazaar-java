@@ -1,4 +1,4 @@
-package Corporation;
+package corporation;
 
 public class Status {
 	private boolean		manager = false;
