@@ -147,7 +147,6 @@ public class Calculette {
 			try {
 				userInput = prompt(ans, calculating);
 				ans = parseInput(calculating, ans, userInput);
-				System.out.println(calculating);
 				calculating = true;
 			} catch (Exception e) {
 				e.printStackTrace();
