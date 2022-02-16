@@ -20,10 +20,16 @@ public class OrcHandling {
 		return "Ending the Orc Mining programm. All Orc will be freed.";
 	}
 	
-	public static void creatingOrc(Map<String, Orc> mine) {
+	/*
+	 * @throws RuntimeException
+	 */
+	public static boolean creatingOrc(Map<String, Orc> mine) throws RuntimeException {
 		String	fledgeName;
 		int		fledgeStrength;
 		int		fledgeHP;
+		
+		if (mine.size() >= 2)
+			throw new RuntimeException("There cannot be more than two orcs in that mine.");
 		
 		System.out.println("We shall create new Orcs");
 		try {
@@ -41,6 +47,7 @@ public class OrcHandling {
 			e.printStackTrace();
 			System.err.println("No Orc has been created today.");
 		}
+		return true;
 	}
 	
 	public static void killingOrc(Map<String, Orc> mine) {
@@ -115,7 +122,12 @@ public class OrcHandling {
 				if (userEntry.equals("quit"))
 					active = false;
 				else if (commands.containsKey(userEntry))
-	                commands.get(userEntry).run();
+					try {
+						commands.get(userEntry).run();
+					} catch (Exception e) {
+						System.err.println(e.getMessage());
+						System.err.println("This is an exceptionnal exception handling.");
+					}
 			} catch (Exception e) {
 				System.err.println("Scanner did die again.");
 				e.printStackTrace();

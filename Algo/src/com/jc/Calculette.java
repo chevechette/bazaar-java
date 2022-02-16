@@ -1,9 +1,7 @@
 package com.jc;
 
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
-import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
