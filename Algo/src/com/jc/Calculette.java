@@ -114,7 +114,7 @@ public class Calculette {
 		boolean	calculating;
 		String	input;
 		
-		System.out.println("Usage : Enter a number, an operator and a second number.");
+		System.out.println("Usage : Enter a number, an operator and a second number. Ex: '12' '+12'");
 		System.out.println("You can iterate on the result with another operator or number.");
 		System.out.println("Use 'C' to clean your answer and 'S' to quit.");
 
