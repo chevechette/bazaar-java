@@ -1,5 +1,10 @@
 package exercices;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.stream.Collectors;
+
 import ajc.basics.Car;
 import ajc.basics.House;
 import ajc.basics.City;
@@ -144,6 +149,58 @@ public class Exercices {
 		
 	}
 	
+	public static void	exercice8() {
+		ArrayList<Orc>			orcs;
+		HashMap<String, Orc>	hashedOrc;
+		
+		orcs = new ArrayList<>();
+		orcs.add(new Orc("Jeremy", 40, 12));
+		orcs.add(new Orc("Francis", 40, 12));
+		orcs.add(new Orc("Bertrand", 40, 12));
+		hashedOrc = new HashMap<>();
+		for (Orc orc : orcs) {
+			System.out.println(orc);
+			hashedOrc.put(orc.getName(), orc);
+		}
+		hashedOrc.remove("Francis");
+		System.out.println(hashedOrc);
+	}
+	
+	public static void	exerciceStream() {
+//		Liste de computers
+//		Filter uniquement les HPs.
+//		Convertique la puissance en MHz (3->3000)
+//		Afficher ces valeurs
+//		Utiliser les streams
+		ArrayList<Computer>	compList;
+		ArrayList<Computer>	updatedCompList;
+		ArrayList<Integer>	freqList;
+		Iterator<Computer>	it;
+		Computer			pc;
+		
+		compList = new ArrayList<>();
+		compList.add(new Computer("HP", 123, 1));
+		compList.add(new Computer("Dell", 23, 4));
+		compList.add(new Computer("HP", 13, 2));
+		compList.add(new Computer("HP", 12, 54));
+		compList.add(new Computer("Acer", 43, 243));
+		it = compList.iterator();
+		while (it.hasNext()) {
+			pc = (Computer) it.next();
+			System.out.println(pc);
+		}
+		updatedCompList = compList.stream()
+					.filter(comp -> comp.getModel().equals("HP"))
+					.map(comp -> {comp.setProcessorFreq(comp.getProcessorFreq() * 1000); return comp;})
+					.collect(Collectors.toCollection(ArrayList::new));
+		freqList = updatedCompList.stream()
+					.mapToInt(comp -> comp.getProcessorFreq())
+					.boxed()
+					.collect(Collectors.toCollection(ArrayList::new));
+		System.out.println(updatedCompList);
+		System.out.println(freqList);
+	}
+	
 	public static void main(String[] args) {
 //		exercice1();
 //		exercice2();
@@ -151,6 +208,8 @@ public class Exercices {
 //		exercice4();
 //		exercice5();
 //		exercice6();
-		exercice7();
+//		exercice7();
+//		exercice8();
+		exerciceStream();
 	}
 }
