@@ -21,7 +21,7 @@ public class Wizard extends Humanoid {
 	
 	public void spellcast(Humanoid target) {
 		if (this.mana < Wizard.manaCost) {
-			return ;
+			throw new InsufficientManaException("Not enough mana.", "mana", String.valueOf(this.mana));
 		}
 		target.receiveDamage(this.force + this.intelligence);
 		this.addMana(-Wizard.manaCost);

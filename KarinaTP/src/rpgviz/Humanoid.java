@@ -15,8 +15,11 @@ public abstract class Humanoid {
 		enemy.receiveDamage(force);
 	}
 	
-	public void receiveDamage(double damage) {
-		this.setHealth(this.health - damage);
+	public void receiveDamage(double damage) throws GenevaConventionException {
+		if (this.health > 0)
+			this.setHealth(this.health - damage);
+		else
+			throw new GenevaConventionException("Please stop hitting the dead body.");
 	}
 
 	@Override

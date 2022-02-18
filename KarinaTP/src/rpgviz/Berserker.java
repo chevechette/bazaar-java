@@ -16,10 +16,9 @@ public class Berserker extends Humanoid {
 		this.setRage(rage);
 	}
 	
-	public void useRage(Humanoid enemy) {
+	public void useRage(Humanoid enemy) throws InsufficientRageException {
 		if (this.rage < Berserker.rageCost) {
-			this.attack(enemy);
-			return ;
+			throw new InsufficientManaException("Not enough rage.", "rage", String.valueOf(this.rage));
 		}
 		this.addRage(-Berserker.rageCost);
 		this.rageAttack(enemy);
