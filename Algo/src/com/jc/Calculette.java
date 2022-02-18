@@ -2,25 +2,39 @@ package com.jc;
 
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Calculette {
+	static Scanner sc;
+
+	final static String		numberRegex = "[0-9]+(\\.[0-9]+)?";
+	final static String		operatorRegex = "[\\+\\-\\/\\*%]";
+	final static String		operationRegex = String.format("^%s%s%s$", numberRegex, operatorRegex, numberRegex);
+	final static String		specialRegex = "[cCqQ]";
 	
-	public static double add(double a, double b) {
+
+	final static Pattern		patternNumber = Pattern.compile(numberRegex);
+	final static Pattern		patternOperator = Pattern.compile(operatorRegex);
+	final static Pattern		patternOperation = Pattern.compile(operationRegex);
+	final static Pattern		patternSpecial = Pattern.compile(specialRegex);
+	
+	public static double add(Double a, Double b) {
 		System.out.println("The result of " + a + " + " + b + " is " + (a + b));
 		return (a + b);
 	}
 	
-	public static double sub(double a, double b) {
+	public static double sub(Double a, Double b) {
 		System.out.println("The result of " + a + " - " + b + " is " + (a - b));
 		return (a - b);
 	}
 	
-	public static double mul(double a, double b) {
+	public static double mul(Double a, Double b) {
 		System.out.println("The result of " + a + " * " + b + " is " + (a * b));
 		return (a * b);
 	}
 	
-	public static double div(double a, double b) {
+	public static double div(Double a, Double b) {
 		if (b == 0) {
 			System.out.println("I don't know how to divide by 0");
 			return (0);
@@ -29,7 +43,7 @@ public class Calculette {
 		return (a / b);
 	}
 	
-	public static double mod(double a, double b) {
+	public static double mod(Double a, Double b) {
 		if (b == 0) {
 			System.out.println("I don't know how to divide by 0");
 			return (0);
@@ -44,26 +58,48 @@ public class Calculette {
 		System.out.println("Use 'C' to clean your answer and 'S' to quit.");
 	}
 	
-	public static String	prompt(Double currentValue) {
-		Scanner	sc;
+	public static String	prompt(Double currentValue, boolean isInitialized) {
 		String	showablePrompt;
 		String	userInput;
 		
-		sc = new Scanner(System.in);
-		sc.useLocale(Locale.US);
 		showablePrompt = String.format("[%f]>", currentValue);
 		System.out.print(showablePrompt);
-		userInput = sc.nextLine();
-		sc.close();
+		if (isInitialized)
+			System.out.print(currentValue.toString());
+		userInput = sc.next();
 		
 		return userInput;
 	}
 	
-	public static double	parseInput(Boolean isInitialised, Double ans, String input) {
-		return(ans);
+	public static Double	parseInput(Boolean isInitialised, Double ans, String input) {
+		String		left;
+		String		right;
+		String		operator;
+		
+		Matcher		matcher;
+
+		matcher = patternSpecial.matcher(input);
+		if (matcher.find()) {
+			operator = input.substring(matcher.start(), matcher.end());
+			return calculate(ans, 0.0, operator.charAt(0));
+		}
+		if (isInitialised)
+			input = ans.toString() + input;
+		matcher = patternOperation.matcher(input);
+		if (matcher.find()) {
+    		matcher = patternNumber.matcher(input);
+			left = (matcher.find()) ? input.substring(matcher.start(), matcher.end()) : null;
+			right = (matcher.find()) ? input.substring(matcher.start(), matcher.end()) : null;
+
+			matcher = patternOperator.matcher(input);
+			operator = (matcher.find()) ? input.substring(matcher.start(), matcher.end()) : null;
+    		
+    		ans = calculate(Double.parseDouble(left), Double.parseDouble(right), operator.charAt(0));
+        }
+		return ans;
 	}
 	
-	public static double	calculate(Double a, Double b, char op) {
+	public static Double	calculate(Double a, Double b, char op) {
 		switch (op) {
 			case '+':
 				a = add(a, b);
@@ -80,34 +116,48 @@ public class Calculette {
 			case '%':
 				a = mod(a, b);
 				break;
+			case 'Q', 'q':
+				System.out.println("Terminating calculator");
+				sc.close();
+				System.exit(0);
+				break;
+			case 'C', 'c':
+				System.out.println("Reinitializing");
+				a = 0.0;
+				break;
 			default:
 				System.out.println("Science has not gone there yet.");
 				break;
 		}
-		return(a);
+		return a;
 	}
 	
 	public static void calculator() {
 		Double	ans;
 		String	userInput;
-		boolean	calculating;
+		Boolean	calculating;
 		
-		calculating = true;
+		calculating = false;
 		ans = 0.0;
+		sc.useLocale(Locale.US);
 		calculatorUsage();
 		do {
-			userInput = prompt(ans); 
-			System.out.println("Your entry is " + userInput);
-			calculating = false;
+			try {
+				userInput = prompt(ans, calculating);
+				ans = parseInput(calculating, ans, userInput);
+				calculating = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				sc.close();
+				sc = new Scanner(System.in);
+			}
 		} while (calculating);
 	}
 	
-	public static void main(String[] args) {
+	public static void simpleCalculator() {
 		
 		// EXERCICE Calculette V1, 2, 3
 		
-		
-		Scanner sc = new Scanner(System.in);
 		double	a;
 		double	b;
 		char	op;
@@ -118,7 +168,8 @@ public class Calculette {
 		System.out.println("You can iterate on the result with another operator or number.");
 		System.out.println("Use 'C' to clean your answer and 'S' to quit.");
 
-		
+
+		sc.useLocale(Locale.US);
 		calculating = true;
 		try {
 			a = sc.nextDouble();
@@ -156,7 +207,7 @@ public class Calculette {
 						a = mod(a, b);
 						break;
 					default:
-						System.out.println("Unknown operation type.");
+						System.err.println("Unknown operation type.");
 						break;
 				}
 				System.out.println("Current answer : " + a);
@@ -166,5 +217,12 @@ public class Calculette {
 		}
 		
 		sc.close();
+	}
+	
+
+	public static void main(String[] args) {
+		sc = new Scanner(System.in);
+
+		calculator();
 	}
 }

@@ -20,10 +20,16 @@ public class OrcHandling {
 		return "Ending the Orc Mining programm. All Orc will be freed.";
 	}
 	
-	public static void creatingOrc(Map<String, Orc> mine) {
+	/*
+	 * @throws RuntimeException
+	 */
+	public static boolean creatingOrc(Map<String, Orc> mine) throws RuntimeException {
 		String	fledgeName;
 		int		fledgeStrength;
 		int		fledgeHP;
+		
+		if (mine.size() >= 2)
+			throw new RuntimeException("There cannot be more than two orcs in that mine.");
 		
 		System.out.println("We shall create new Orcs");
 		try {
@@ -35,29 +41,38 @@ public class OrcHandling {
 			fledgeHP = Integer.parseInt(sc.next());
 			mine.put(fledgeName, new Orc(fledgeName, fledgeHP, fledgeStrength));
 			System.out.println("Orc has been created today.");
+		} catch (NumberFormatException e) {
+			System.err.println("This is not a number, try again.");
 		} catch (Exception e) {
-			System.out.println("No Orc has been created today.");
-			return ;
+			e.printStackTrace();
+			System.err.println("No Orc has been created today.");
 		}
+		return true;
 	}
 	
 	public static void killingOrc(Map<String, Orc> mine) {
 		String	sacrifice;
 
 		System.out.println("Who shall die ?");
-		sacrifice = sc.next();
+		try {
+			sacrifice = sc.next();
+		} catch (Exception e) {
+			System.err.println("Some input issue. Try again.");
+			e.printStackTrace();
+			return ;
+		}
 		if (mine.containsKey(sacrifice)) {
 			mine.remove(sacrifice);
 			System.out.println("Orc " + sacrifice + " has been killed."
 					+ mine.size() + " orcs remaining.");
 		} else {
-			System.out.println("There is no such Orc within our ranks. Would you like to create one ?");
+			System.err.println("There is no such Orc within our ranks. Would you like to create one ?");
 		}
 	}
 	
 	public static void	inspectMine(Map<String, Orc> mine) {
 		if (mine.size() == 0) {
-			System.out.println("The production has yet to birth orcs.");
+			System.err.println("The production has yet to birth orcs.");
 			return;
 		}
 		System.out.format("The mine has birthed %d orcs. Those orcs are :", mine.size());
@@ -106,10 +121,16 @@ public class OrcHandling {
 				userEntry = sc.next();
 				if (userEntry.equals("quit"))
 					active = false;
-	            if (commands.containsKey(userEntry))
-	                commands.get(userEntry).run();
+				else if (commands.containsKey(userEntry))
+					try {
+						commands.get(userEntry).run();
+					} catch (Exception e) {
+						System.err.println(e.getMessage());
+						System.err.println("This is an exceptionnal exception handling.");
+					}
 			} catch (Exception e) {
 				System.err.println("Scanner did die again.");
+				e.printStackTrace();
 				active = false;
 			}
 		} while (active);
