@@ -1,7 +1,11 @@
 package test;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import data.Admin;
 import data.DataBase;
+import data.Idea;
 import data.User;
 
 public class ConsoleTopidea {
@@ -24,6 +28,9 @@ public class ConsoleTopidea {
 		Admin				amaterasu;
 		User				suzano;
 		User				orochi;
+		ArrayList<Idea>		ideaList;
+		Iterator<Idea>		itIdea;
+		Idea				thought;
 		
 		System.out.println("=========DB INITIALISE==========");
 		// Initializing Database
@@ -57,7 +64,21 @@ public class ConsoleTopidea {
 		
 		System.out.println("=========SOME IDEAS CREATION==========");
 		orochi.createIdea("Treason", "anime", "Top 10 anime death", null);
+		orochi.createIdea("I am evil", "kabuki", "Top 10 anime death", null);
+		suzano.createIdea("SWORDS", "kabuki", "LET'S BUY SWORDS !", null);
 		
+		System.out.println("=========SOME IDEAS RATINGS==========");
+		ideaList = logHorizon.getIdeas();
+		itIdea = ideaList.iterator();
+		while (itIdea.hasNext()) {
+			thought = (Idea) itIdea.next();
+			if (thought.getCategory().getName().equals("kabuki"))
+				orochi.rate(thought, 1);
+			else
+				orochi.rate(thought, -1);
+			suzano.rate(thought, 1);
+			System.out.println(thought);
+		}
 		
 		System.out.println("=========DELETE ACCOUNT==========");
 		logHorizon.removeAccount(suzano);

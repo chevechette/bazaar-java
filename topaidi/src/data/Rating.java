@@ -3,9 +3,9 @@ package data;
 public class Rating {
 	private User	user;
 	private Idea	idea;
-	private byte	score; // SCORE TOP == 1 ; FLOP == -1
+	private int	score; // SCORE TOP == 1 ; FLOP == -1
 	
-	public Rating(User user, Idea idea, byte score) {
+	public Rating(User user, Idea idea, int score) {
 		this.user = user;
 		this.idea = idea;
 		this.score = score;
@@ -19,7 +19,7 @@ public class Rating {
 		return idea;
 	}
 	
-	public byte getScore() {
+	public int getScore() {
 		return score;
 	}
 	

@@ -33,7 +33,7 @@ public class User extends Account implements Reportable {
 		topic.addComment(new Comment(topic, this, content));
 	}
 	
-	public void rate(Idea topic, byte vote) {
+	public void rate(Idea topic, int vote) {
 		topic.addRating(new Rating(this, topic, vote));
 	}
 	

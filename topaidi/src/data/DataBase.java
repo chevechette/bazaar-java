@@ -123,6 +123,38 @@ public class DataBase {
 			this.reports.remove(delation);
 	}
 
+	public ArrayList<Account> getAccounts() {
+		return accounts;
+	}
+
+	public ArrayList<Category> getCategories() {
+		return categories;
+	}
+
+	public ArrayList<Idea> getIdeas() {
+		return ideas;
+	}
+
+	public ArrayList<Report> getReports() {
+		return reports;
+	}
+
+	public void setAccounts(ArrayList<Account> accounts) {
+		this.accounts = accounts;
+	}
+
+	public void setCategories(ArrayList<Category> categories) {
+		this.categories = categories;
+	}
+
+	public void setIdeas(ArrayList<Idea> ideas) {
+		this.ideas = ideas;
+	}
+
+	public void setReports(ArrayList<Report> reports) {
+		this.reports = reports;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

@@ -110,6 +110,7 @@ public class Idea implements Reportable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
+		
 		builder.append("Idea [title=");
 		builder.append(title);
 		builder.append(", description=");
@@ -120,6 +121,8 @@ public class Idea implements Reportable {
 		builder.append(creationDate);
 		builder.append(", active=");
 		builder.append(active);
+		builder.append(", score=");
+		builder.append(this.ratings.stream().mapToInt(r-> r.getScore()).sum());
 		builder.append("]");
 		return builder.toString();
 	}
