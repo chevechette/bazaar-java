@@ -79,6 +79,9 @@ public class ConsoleTopidea {
 			suzano.rate(thought, 1);
 			System.out.println(thought);
 		}
+		System.out.println(logHorizon.getRatedBrains());
+		System.out.println(logHorizon.getRatedTops());
+		System.out.println(logHorizon.getRatedBuzz());
 		
 		System.out.println("=========DELETE ACCOUNT==========");
 		logHorizon.removeAccount(suzano);

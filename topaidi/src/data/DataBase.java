@@ -3,7 +3,6 @@ package data;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import exceptions.CategoryAlreadyInDataBaseException;
@@ -34,7 +33,9 @@ public class DataBase {
 		ArrayList<Idea>		ranking;
 		
 		ranking = new ArrayList<Idea>(this.ideas.stream()
-				.filter(i -> i.isActive()).sorted().collect(Collectors.toList()));
+				.filter(i -> i.isActive())
+				.sorted(Comparator.reverseOrder())
+				.collect(Collectors.toList()));
 		return ranking;
 	}
 	
@@ -43,7 +44,7 @@ public class DataBase {
 		
 		ranking = new ArrayList<Idea>(this.ideas.stream()
 				.filter(i -> i.isActive())
-				.sorted(Comparator.comparingInt(Idea::getPopularity))
+				.sorted(Comparator.comparingInt(Idea::getPopularity).reversed())
 				.collect(Collectors.toList()));
 		return ranking;
 	}
@@ -53,7 +54,8 @@ public class DataBase {
 		
 		users = new ArrayList<User>(this.accounts.stream()
 				.filter(acc -> acc instanceof User)
-				.map(acc -> (User) acc).sorted(Comparator.comparingInt(User::getIdeaCount))
+				.map(acc -> (User) acc)
+				.sorted(Comparator.comparingInt(User::getIdeaCount).reversed())
 				.collect(Collectors.toList()));
 		return users;
 	}

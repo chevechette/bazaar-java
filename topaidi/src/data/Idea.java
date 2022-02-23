@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import exceptions.CannotRateException;
 
-public class Idea implements Reportable {
+public class Idea implements Reportable, Comparable<Idea> {
 	private String				title;
 	private String				description;
 	private Category			category;
