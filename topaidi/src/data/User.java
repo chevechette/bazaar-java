@@ -8,6 +8,17 @@ public class User extends Account implements Reportable {
 		this.setIdeaCount(0);
 	}
 	
+	public void createIdea(String title, String category, String description, String picture) {
+		DataBase	db;
+		Category	cat;
+		
+		db = DataBase.getInstance();
+		cat = db.getCategory(category);
+		if (cat == null)
+			return; // should add exception
+		createIdea(title, cat, description, picture);
+	}
+	
 	public void createIdea(String title, Category category, String description, String picture) {
 		DataBase	db;
 		Idea		genius;

@@ -36,14 +36,27 @@ public class ConsoleTopidea {
 		suzano = new User("bolossDuNeufDeux@sama.sun", "J'aiPerduMonEpee");
 		orochi = new User("r0x0r@badass.com", "C'estMonEpéeMaintenant");
 		logHorizon.addAccount(amaterasu);
+		System.out.println("Inserting " + amaterasu.getEmail());
 		logHorizon.addAccount(suzano);
+		System.out.println("Inserting " + suzano.getEmail());
+		logHorizon.addAccount(null);
+		System.out.println("THERE'S A null TRAP !");
 		logHorizon.addAccount(orochi);
+		System.out.println("Inserting " + orochi.getEmail());		
+		// Check
+		System.out.println(logHorizon);
 		
 		System.out.println("=========CATEGORY CREATION==========");
-		// Check
-		System.out.println(amaterasu);
-		System.out.println(orochi);
+		amaterasu.createCategory("kabuki", "Some sexist theater with music and a lot of crosseyed poses. Still cool");
+		amaterasu.createCategory("noh", "Some creepy theater veeeery slow talking");
+		amaterasu.createCategory("anime", "Well... this happenned.");
+		
 		System.out.println(logHorizon);
+		amaterasu.deleteCategory("noh");
+		System.out.println(logHorizon);
+		
+		System.out.println("=========SOME IDEAS CREATION==========");
+		orochi.createIdea("Treason", "anime", "Top 10 anime death", null);
 		
 		
 		System.out.println("=========DELETE ACCOUNT==========");

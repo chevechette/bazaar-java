@@ -17,6 +17,13 @@ public class Admin extends Account {
 		db.addCategory(cat);
 	}
 	
+	public void deleteCategory(String name) {
+		DataBase	db;
+		
+		db = DataBase.getInstance();
+		db.removeCategory(name);
+	}
+	
 	public void deleteCategory(Category cat) {
 		DataBase	db;
 		

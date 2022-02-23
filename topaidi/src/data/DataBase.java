@@ -1,6 +1,7 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import exceptions.CategoryAlreadyInDataBaseException;
 import exceptions.IdeaAlreadyInDataBaseException;
@@ -26,7 +27,39 @@ public class DataBase {
 		return DataBase.instance;
 	}
 	
+	public Account getAccount(String email) {
+		Iterator<Account>	it;
+		Account				acc;
+		
+		if (email == null)
+			return null;
+		it = this.accounts.iterator();
+		while (it.hasNext()) {
+			acc = (Account) it.next();
+			if (acc.getEmail().equals(email))
+				return acc;
+		}
+		return null;
+	}
+
+	public Category getCategory(String name) {
+		Iterator<Category>	it;
+		Category			cat;
+		
+		if (name == null)
+			return null;
+		it = this.categories.iterator();
+		while (it.hasNext()) {
+			cat = (Category) it.next();
+			if (cat.getName().equals(name))
+				return cat;
+		}
+		return null;
+	}
+	
 	public void addAccount(Account someone) throws UserAlreadyInDataBaseException {
+		if (someone == null)
+			return;
 		if (this.accounts.contains(someone))
 			throw new UserAlreadyInDataBaseException();
 		if (this.accounts.stream()
@@ -41,12 +74,26 @@ public class DataBase {
 	}
 
 	public void addCategory(Category cat) throws CategoryAlreadyInDataBaseException {
+		if (cat == null)
+			return;
 		if (this.categories.contains(cat))
 			throw new CategoryAlreadyInDataBaseException();
 		if (this.categories.stream()
 				.anyMatch(c -> c.getName().equals(cat.getName())))
 			throw new CategoryAlreadyInDataBaseException();
 		this.categories.add(cat);
+	}
+	
+	public void removeCategory(String name) {
+		Iterator<Category>	it;
+		Category			cat;
+		
+		it = this.categories.iterator();
+		while (it.hasNext()) {
+			cat = (Category) it.next();
+			if (cat.getName().equals(name))
+				it.remove();
+		}
 	}
 	
 	public void removeCategory(Category cat) {
