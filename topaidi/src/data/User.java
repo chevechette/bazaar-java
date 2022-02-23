@@ -1,11 +1,15 @@
 package data;
 
+import java.util.ArrayList;
+
 public class User extends Account implements Reportable {
-	private int		ideaCount;
+	private int				ideaCount;
+	private ArrayList<Idea>	ips;
 
 	public User(String email, String password) {
 		super(email, password, false);
 		this.setIdeaCount(0);
+		this.ips = new ArrayList<Idea>();
 	}
 	
 	public void createIdea(String title, String category, String description, String picture) {
@@ -61,4 +65,13 @@ public class User extends Account implements Reportable {
 	public void setIdeaCount(int ideaCount) {
 		this.ideaCount = ideaCount;
 	}
+
+	public ArrayList<Idea> getIps() {
+		return ips;
+	}
+
+	public void setIps(ArrayList<Idea> ips) {
+		this.ips = ips;
+	}
+	
 }

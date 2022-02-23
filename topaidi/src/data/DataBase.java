@@ -1,7 +1,10 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import exceptions.CategoryAlreadyInDataBaseException;
 import exceptions.IdeaAlreadyInDataBaseException;
@@ -25,6 +28,34 @@ public class DataBase {
 		if (DataBase.instance == null)
 			DataBase.instance = new DataBase();
 		return DataBase.instance;
+	}
+	
+	public ArrayList<Idea>	getRatedTops() {
+		ArrayList<Idea>		ranking;
+		
+		ranking = new ArrayList<Idea>(this.ideas.stream()
+				.filter(i -> i.isActive()).sorted().collect(Collectors.toList()));
+		return ranking;
+	}
+	
+	public ArrayList<Idea>	getRatedBuzz() {
+		ArrayList<Idea>		ranking;
+		
+		ranking = new ArrayList<Idea>(this.ideas.stream()
+				.filter(i -> i.isActive())
+				.sorted(Comparator.comparingInt(Idea::getPopularity))
+				.collect(Collectors.toList()));
+		return ranking;
+	}
+	
+	public ArrayList<User>	getRatedBrains() {
+		ArrayList<User>		users;
+		
+		users = new ArrayList<User>(this.accounts.stream()
+				.filter(acc -> acc instanceof User)
+				.map(acc -> (User) acc).sorted(Comparator.comparingInt(User::getIdeaCount))
+				.collect(Collectors.toList()));
+		return users;
 	}
 	
 	public Account getAccount(String email) {

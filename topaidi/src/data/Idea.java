@@ -26,6 +26,22 @@ public class Idea implements Reportable {
 		this.ratings = new ArrayList<Rating>();
 	}
 	
+	public int compareTo(Idea competitor) {
+		double	thisPercent;
+		double	compPercent;
+		
+		thisPercent = this.ratings.stream().mapToDouble(r -> r.getScore()).sum() / this.ratings.size();
+		compPercent = competitor.ratings.stream().mapToDouble(r -> r.getScore()).sum() / this.ratings.size();
+		if (thisPercent == compPercent) {
+			if (this.ratings.size() == competitor.ratings.size()) {
+				return (this.creationDate.compareTo(competitor.creationDate) == 1) ? 1 : -1;
+			} else
+				return (this.ratings.size() > competitor.ratings.size()) ? 1 : -1;
+				
+		} else
+			return (thisPercent > compPercent) ? 1 : -1;
+	}
+	
 	public void addRating(Rating vote) throws CannotRateException {
 		if (this.ratings.stream().anyMatch(v -> v.getUser().equals(vote.getUser())))
 			throw new CannotRateException();
@@ -105,6 +121,10 @@ public class Idea implements Reportable {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+	
+	public int getPopularity() {
+		return this.ratings.size();
 	}
 
 	@Override
