@@ -1,8 +1,9 @@
 package ajc.basics;
 
+import java.util.Comparator;
 import java.util.Objects;
 
-public class Orc {
+public class Orc implements Comparator<Orc> {
 	private String	name;
 	private int		health;
 	private int		force;
@@ -19,6 +20,13 @@ public class Orc {
 	
 	public void		attack(Orc ennemy) {
 		ennemy.setHealth(ennemy.getHealth() - this.force);
+	}
+
+	@Override
+	public int compare(Orc o1, Orc o2) {
+		if (o1.getForce() == o2.getForce())
+			return 0;
+		return ((o1.getForce() > o2.getForce()) ? 1 : -1);
 	}
 
 	@Override

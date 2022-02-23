@@ -14,6 +14,7 @@ import ajc.basics.Commande;
 import ajc.basics.Edessert;
 import ajc.basics.Edrink;
 import ajc.basics.Emeal;
+import ajc.basics.EvolvedOrc;
 
 public class Exercices {
 	public static void exercice1() {
@@ -201,6 +202,26 @@ public class Exercices {
 		System.out.println(freqList);
 	}
 	
+	public static void exerciceOrcCompare() {
+		ArrayList<Orc>	orcList;
+		
+		orcList = new ArrayList<Orc>();
+		orcList.add(new Orc("Gudule", 12,134));
+		orcList.add(new Orc("Bertrand", 1,214));
+		orcList.add(new Orc("Roger", 3,14));
+		orcList.add(new Orc("Raoul", 40,4));
+		System.out.println(orcList);
+		orcList.sort(new Orc(2, 3));
+		System.out.println(orcList);
+	}
+	
+	public static void exerciceOrcWithWeapons() {
+		EvolvedOrc<Orc>		shakespear;
+	
+		shakespear = new EvolvedOrc<Orc>(100, 12);
+		shakespear.equip(new Orc("Othello", 0, 0));
+	}
+	
 	public static void main(String[] args) {
 //		exercice1();
 //		exercice2();
@@ -210,6 +231,8 @@ public class Exercices {
 //		exercice6();
 //		exercice7();
 //		exercice8();
-		exerciceStream();
+//		exerciceStream();
+//		exerciceOrcCompare();
+		exerciceOrcWithWeapons();
 	}
 }
