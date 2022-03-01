@@ -1,7 +1,6 @@
 package karina.jdbc;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -60,7 +59,7 @@ public class test {
 		rs.close();
 	}
 	
-	public static void main(String[] args) {
+	public static void oldmain(String[] args) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cnct = DriverManager.getConnection("jdbc:mysql://localhost:3306/scott", "tolkien", "PASSWORD");
@@ -71,5 +70,9 @@ public class test {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+		
 	}
 }
